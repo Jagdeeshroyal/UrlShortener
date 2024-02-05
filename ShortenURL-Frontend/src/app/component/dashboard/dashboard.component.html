@@ -1,0 +1,28 @@
+<div class="container">
+
+    <div class="row">
+        <h4 class="text-center text-primary m-3">Short URL </h4>
+    </div>
+    <div class="row mt-3 md-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="input-group mt-1 mb-1">
+                    <input type="text" class="form-control" placeholder="Url here" [(ngModel)] = "url" aria-label="original url"
+                        aria-describedby="button-addon2">
+                    <button class="btn btn-outline-primary" type="button" (click)="generateShortUrl()" id="button-addon2">Generate</button>
+                </div>
+            </div>
+        </div>
+        <div class="row  mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <div *ngIf="isValidUrl">
+                        <h5>SUCCESS</h5>
+                    </div>
+                    <div *ngIf="!isValidUrl">
+                        <h5>FAILURE</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
