@@ -10,7 +10,7 @@ export class DashboardComponent {
 
   url: string = "";
   shortUrl: string = "";
-  isValidUrl: boolean = false;
+  isValidUrl: boolean = true;
 
   constructor(private urlShortServ: UrlShortnerService) { }
 
@@ -19,26 +19,21 @@ export class DashboardComponent {
   }
 
   generateShortUrl() {
-    console.log("IN");
-    this.urlShortServ.generateShortUrl2(this.url);
-    // .subscribe({
-    //   next: (res) => {
-    //     console.log("jaggu");
-    //     if (res.status === "SUCCESS") {
-    //       console.log("jaggu");
-    //       this.shortUrl = res.url.shortenUrl;
-    //       this.isValidUrl = true;
-    //     } else {
-    //       this.isValidUrl = false;
-    //       console.log("fail");
+    this.urlShortServ.generateShortUrl(this.url).subscribe({
+      next: (res) => {
+        if (res.status === "SUCCESS") {
+          this.shortUrl = res.url.shortenUrl;
+          this.url = res.url.originalUrl;
+          this.isValidUrl = true;
+        } else {
+          this.isValidUrl = false;
+        }
+      },
+      error: (err) => {
+        this.isValidUrl = false;
+      }
+    });;
 
-    //     }
-    //   }, error: (err) => {
-    //     this.isValidUrl = false;
-    //   }, complete() {
-    //       console.log("Completed");
-    //   },
-    // });
 
   }
 }

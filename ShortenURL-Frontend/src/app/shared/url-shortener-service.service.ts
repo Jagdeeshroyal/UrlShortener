@@ -8,23 +8,15 @@ import { Observable } from 'rxjs';
 export class UrlShortnerService {
   serviceUrl: string = '';
   constructor(private http: HttpClient) {
-    this.serviceUrl = "http://localhost:8080/api";
+    this.serviceUrl = "http://localhost:8080/url/shortner";
   }
 
   generateShortUrl(url: string) {
-    this.http.post<any>(this.serviceUrl, url).subscribe(
-      res => {
-        console.log("Hello here");
-      }, err => {
-        console.log("HEHHEHHEHHEH")
-      });
+    return this.http.post<any>(this.serviceUrl, url);
   }
 
   generateShortUrl2(url: string) {
-    this.http.post<any>(this.serviceUrl, url).subscribe({ 
-      next: (res) => { console.log("Next")},
-     error: (err) => { console.log("Error") },
-    complete : ()=>{ console.log("Complete")} });
+    this.http.post<any>(this.serviceUrl, url)
 
   }
 
